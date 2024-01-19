@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "miner"
+version = "0.1.0"
+description = "Data Miner Service for GoToEventsBot"
+authors = ["Ilya Chesalin <ilya.chesalin@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+httpx = "^0.26.0"
+beautifulsoup4 = "^4.12.3"
+aio-pika = "^9.4.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
