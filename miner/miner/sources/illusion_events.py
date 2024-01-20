@@ -4,7 +4,7 @@ from datetime import datetime
 import httpx
 from bs4 import BeautifulSoup
 
-from miner.miner.custom_types import Currency, EventSchema, Format, Source
+from miner.miner.custom_types import EventSchema, Format, Source
 
 API_LINK_ALL = "https://illusion-cinema.ru/events/"
 API_LINK_BY_ID = "https://illusion-cinema.ru/{}/"
@@ -69,7 +69,7 @@ async def get_event(client: httpx.AsyncClient, div) -> EventSchema | None:
             "city": "Москва",
             "address": "Котельническая набережная, 1/15 - Кинотеатр Иллюзион",
             "price": None,
-            "currency": Currency.RUBLE,
+            "currency": None,
             "url": url,
             "image_url": get_image_url(image_url),
         }

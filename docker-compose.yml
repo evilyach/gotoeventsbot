@@ -11,8 +11,26 @@ services:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
     networks:
-      - rabbitmq_network
+      - gotoeventsbot-network
+
+  postgres:
+    container_name: gotoeventsbot-postgres
+    image: "postgres:16-alpine"
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=gotoeventsbot
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - gotoeventsbot-network
+
+volumes:
+  postgres_data: {}
 
 networks:
-  rabbitmq_network:
+  gotoeventsbot-network:
     driver: bridge

@@ -3,7 +3,7 @@ from datetime import datetime
 
 import httpx
 
-from miner.miner.custom_types import EventSchema, Format, Source
+from miner.miner.custom_types import Currency, EventSchema, Format, Source
 
 API_LINK_ALL = "https://feeds.tildacdn.com/api/getfeed/?feeduid=617755803461"
 
@@ -57,7 +57,7 @@ async def get_hackathon_rus_events(client: httpx.AsyncClient) -> list[EventSchem
                     "city": get_city_from_parts(json["parts"], cities),
                     "address": None,
                     "price": 0,
-                    "currency": None,
+                    "currency": Currency.RUB,
                     "url": json["url"],
                     "image_url": json["image"],
                 }

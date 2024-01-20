@@ -1,0 +1,2 @@
+class ApiChangedException(Exception):
+    pass

@@ -3,7 +3,7 @@ from datetime import datetime
 
 import httpx
 
-from miner.miner.custom_types import EventSchema, Format, Source
+from miner.miner.custom_types import Currency, EventSchema, Format, Source
 
 API_LINK_ALL = "https://events.yandex.ru/api/events?isUpcoming=true"
 API_LINK_BY_ID = "https://events.yandex.ru/api/events/{}"
@@ -46,7 +46,7 @@ async def get_yandex_events(client: httpx.AsyncClient) -> list[EventSchema]:
                     location["place"] for location in json["locations"]
                 ),
                 "price": 0,
-                "currency": None,
+                "currency": Currency.RUB,
                 "url": API_LINK_PAGE.format(json["slug"]),
                 "image_url": json["image"],
             }

@@ -9,6 +9,9 @@ class Source(Enum):
     HACKATHON_RUS_EVENTS = auto()
     TINKOFF_EVENTS = auto()
     ILLUSION_EVENTS = auto()
+    VK_CLOUD_EVENTS = auto()
+    VK_EVENTS = auto()
+    SK_EVENTS = auto()
 
 
 class Format(Enum):
@@ -19,7 +22,7 @@ class Format(Enum):
 
 
 class Currency(Enum):
-    RUBLE = auto()
+    RUB = auto()
 
 
 class EventSchema(TypedDict):
@@ -34,4 +37,4 @@ class EventSchema(TypedDict):
     price: int | None
     currency: Currency | None
     url: str
-    image_url: str
+    image_url: str | None

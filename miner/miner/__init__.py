@@ -1,25 +1,40 @@
-import asyncio
 import logging
 from datetime import date, datetime, time, timedelta
-from typing import NoReturn
 
+import typer
+
+from miner.miner.helpers import async_typer
 from miner.miner.scheduler import run_at
 from miner.miner.tasks import mine_data
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(format="%(levelname)s : %(message)s", level=logging.INFO)
+logging.getLogger("httpx").setLevel(logging.ERROR)
+
+
+app = typer.Typer()
 logger = logging.getLogger(__name__)
 
 
-async def main() -> NoReturn:
+@app.command()
+@async_typer
+async def once():
+    logger.info("Running once...")
+
+    await mine_data()
+
+
+@app.command()
+@async_typer
+async def run():
     logger.info("Starting...")
 
     while True:
-        when = datetime.combine(date.today() + timedelta(days=1), time(8, 00))
-
-        print(when)
-
-        await run_at(when, mine_data)
+        try:
+            when = datetime.combine(date.today() + timedelta(days=1), time(8, 00))
+            await run_at(when, mine_data)
+        except KeyboardInterrupt:
+            return 0
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    app()

@@ -2,7 +2,7 @@ from datetime import datetime
 
 import httpx
 
-from miner.miner.custom_types import EventSchema, Format, Source
+from miner.miner.custom_types import Currency, EventSchema, Format, Source
 
 API_LINK_ALL = "https://meetup.tinkoff.ru/pwameetups/papi/getMeetups"
 API_LINK_PAGE = "https://meetup.tinkoff.ru/event/{}"
@@ -41,7 +41,7 @@ async def get_tinkoff_events(client: httpx.AsyncClient) -> list[EventSchema]:
                 "city": json["city"]["name"],
                 "address": f"{json["platform"]["address"]} - {json["platform"]["title"]}",
                 "price": 0,
-                "currency": None,
+                "currency": Currency.RUB,
                 "url": API_LINK_PAGE.format(json["url"]),
                 "image_url": json["banners"]["imageGrid"],
             }
